@@ -3,7 +3,7 @@
  * @flow
  */
 import React, { Component } from 'react';
-import PropTypes from 'prop-types
+import PropTypes from 'prop-types';
 import { processColor, requireNativeComponent, PointPropType, View } from 'react-native';
 const deprecatedPropType = require('react-native/Libraries/Utilities/deprecatedPropType.js');
 
