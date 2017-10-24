@@ -1,8 +1,7 @@
 // @flow
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { processColor, requireNativeComponent, PointPropType, StyleSheet, View } from 'react-native';
+import { processColor, requireNativeComponent, PointPropType, StyleSheet, View, ViewPropTypes } from 'react-native';
 const deprecatedPropType = require('react-native/Libraries/Utilities/deprecatedPropType.js');
 
 const convertPoint = (name, point) => {
@@ -19,8 +18,8 @@ const convertPoint = (name, point) => {
 };
 
 type PropsType = {
-  start?: Array<number> | {x: number, y: number};
-  end?: Array<number> | {x: number, y: number};
+  start?: Array<number> | { x: number, y: number };
+  end?: Array<number> | { x: number, y: number };
   colors: Array<string>;
   locations?: Array<number>;
 } & typeof(View);
@@ -43,7 +42,7 @@ export default class LinearGradient extends Component {
     ]),
     colors: PropTypes.arrayOf(PropTypes.string).isRequired,
     locations: PropTypes.arrayOf(PropTypes.number),
-    ...View.propTypes,
+    ...ViewPropTypes,
   };
   props: PropsType;
   gradientRef: any;
@@ -88,14 +87,14 @@ export default class LinearGradient extends Component {
     return (
       <View ref={(component) => { this.gradientRef = component; }} {...otherProps} style={style}>
         <NativeLinearGradient
-          style={{position: 'absolute', top: 0, left: 0, bottom: 0, right: 0}}
+          style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0 }}
           colors={colors.map(processColor)}
           start={convertPoint('start', start)}
           end={convertPoint('end', end)}
           locations={locations ? locations.slice(0, colors.length) : null}
           borderRadii={borderRadiiPerCorner}
         />
-        { children }
+        {children}
       </View>
     );
   }
